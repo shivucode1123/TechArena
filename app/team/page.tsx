@@ -7,9 +7,9 @@ export const metadata = {
 };
 
 const teamMembers = [
-  { name: 'Alice', role: 'Founder & CEO', photoUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Bob', role: 'Head of Engineering', photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Charlie', role: 'Lead Designer', photoUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=600' },
+  { name: 'Alice', role: 'Founder & CEO', photoUrl: '/lanyard.png' },
+  { name: 'Bob', role: 'Head of Engineering', photoUrl: '/lanyard.png' },
+  { name: 'Charlie', role: 'Lead Designer', photoUrl: '/lanyard.png' },
 ];
 
 export default function TeamPage() {
@@ -31,7 +31,8 @@ export default function TeamPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member, idx) => (
             <div key={idx} className="relative w-full h-[600px] bg-white/5 rounded-3xl overflow-hidden border border-white/10 glass shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
-              <Lanyard photoUrl={member.photoUrl} position={[0, 0, 15]} fov={25} />
+              {/* Zoomed in by moving camera closer (Z: 12) and reducing FOV (20) */}
+              <Lanyard photoUrl={member.photoUrl} position={[0, 0, 12]} fov={20} />
               
               <div className="absolute bottom-8 left-0 right-0 text-center pointer-events-none">
                 <h3 className="text-3xl font-bold font-display tracking-tight text-white drop-shadow-md">{member.name}</h3>
