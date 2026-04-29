@@ -17,7 +17,7 @@ export default function About() {
           >
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-[2px] bg-gradient-to-r from-primary to-accent"></div>
-              <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-display font-bold tracking-widest uppercase text-sm">About Eventis</p>
+              <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-display font-bold tracking-widest uppercase text-sm">About TechArena</p>
             </div>
             
             {/* 3D Glass Prism Representation */}
@@ -43,10 +43,10 @@ export default function About() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           >
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold mb-8 leading-[1.1] text-white">
-              Why You Should Attend Eventis
+              Why You Should Attend TechArena
             </h2>
             <p className="text-gray-400 text-lg md:text-xl mb-6 leading-relaxed font-light">
-              Eventis is the ultimate gathering for tech enthusiasts, industry leaders, and innovators to delve into the world of AI, machine learning, and the future of emerging technologies. This summit offers a unique opportunity to hear from top experts.
+              TechArena is the ultimate gathering for tech enthusiasts, industry leaders, and innovators to delve into the world of AI, machine learning, and the future of emerging technologies. This summit offers a unique opportunity to hear from top experts.
             </p>
             <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
               You'll have the chance to explore real-world use cases, witness cutting-edge demos, and connect with others who are driving change in the tech world. Be part of the conversation that's shaping the future.

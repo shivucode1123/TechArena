@@ -73,7 +73,7 @@ export default function Hero() {
           </div>
 
           <h1 className="text-6xl sm:text-8xl md:text-[12rem] font-display font-black leading-none tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white/90 to-white/30 drop-shadow-2xl">
-            EVENTIS
+            TECHARENA
           </h1>
           
           <p className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl font-light leading-relaxed mb-16">

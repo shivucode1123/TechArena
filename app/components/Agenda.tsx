@@ -8,7 +8,7 @@ const schedule = {
     {
       time: '09.30-10.30 AM',
       title: 'Opening Remarks',
-      desc: 'Welcome to the Eventis Tech Summit. Kick off the day with an introduction from the event organizers and a sneak peek of what\'s in store.',
+      desc: 'Welcome to the TechArena Tech Summit. Kick off the day with an introduction from the event organizers and a sneak peek of what\'s in store.',
       speaker: null
     },
     {

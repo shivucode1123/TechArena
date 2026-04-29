@@ -13,8 +13,8 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Eventis - Free Event and Conference Template Replicated",
-  description: "Replication of Eventis Framer Template",
+  title: "TechArena - Free Event and Conference Template Replicated",
+  description: "Replication of TechArena Framer Template",
 };
 
 export default function RootLayout({

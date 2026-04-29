@@ -12,7 +12,7 @@ const plans = [
       'Entry to keynote sessions',
       'Access to tech expo floor',
       'Standard networking lounge',
-      'Eventis welcome kit'
+      'TechArena welcome kit'
     ]
   },
   {

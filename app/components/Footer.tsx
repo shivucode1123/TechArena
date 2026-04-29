@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
           {/* Logo */}
           <div className="text-2xl font-display font-bold tracking-wider">
-            eventis.
+            TechArena.
           </div>
 
           {/* Links */}
@@ -42,7 +42,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 pt-8 border-t border-white/10">
-          <p>All copyrights © eventis</p>
+          <p>All copyrights © TechArena</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-white transition-colors">Terms and Conditions</a>
             <a href="https://fremix.design/" className="hover:text-white transition-colors">Designed By Jitu Raut @fremix.design</a>
