@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const roles = ['Designers', 'Developers', 'Creators', 'Visionaries'];
+const roles = ['Builders', 'Innovators', 'Developers', 'Hackers'];
 
 export default function Hero() {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -52,11 +52,6 @@ export default function Hero() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center"
         >
-          <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
-            <p className="text-gray-300 font-medium tracking-widest uppercase text-xs sm:text-sm">
-              The Ultimate Design & Tech Summit
-            </p>
-          </div>
           
           <div className="h-16 md:h-24 mb-4 overflow-hidden flex justify-center items-center">
             <span className="text-3xl md:text-6xl font-display font-medium text-white mr-4">For</span>
@@ -72,13 +67,10 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          <h1 className="text-6xl sm:text-8xl md:text-[12rem] font-display font-black leading-none tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white/90 to-white/30 drop-shadow-2xl">
+          <h1 className="text-[10vw] sm:text-[11vw] md:text-[11vw] lg:text-[130px] xl:text-[140px] font-display font-black leading-none tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white/90 to-white/30 drop-shadow-2xl">
             TECHARENA
           </h1>
           
-          <p className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl font-light leading-relaxed mb-16">
-            Join industry leaders, visionaries, and creators for a three-day immersive experience redefining the future of digital product design.
-          </p>
         </motion.div>
 
         <motion.div
@@ -86,8 +78,8 @@ export default function Hero() {
           className="flex flex-col md:flex-row items-center justify-between mt-12 md:mt-24 border-t border-white/10 pt-10"
         >
           <div className="text-center md:text-left mb-8 md:mb-0 group cursor-default">
-            <p className="text-white font-display font-bold text-2xl transition-all duration-300 group-hover:text-primary">14-16 Oct 2025</p>
-            <p className="text-gray-500 text-sm mt-1 uppercase tracking-widest">Date & Time</p>
+            <p className="text-white font-display font-bold text-2xl transition-all duration-300 group-hover:text-primary">Since 2024</p>
+            <p className="text-gray-500 text-sm mt-1 uppercase tracking-widest">Established</p>
           </div>
           
           <motion.div
@@ -107,7 +99,7 @@ export default function Hero() {
           </motion.div>
 
           <div className="text-center md:text-right mt-8 md:mt-0 group cursor-default">
-            <p className="text-white font-display font-bold text-2xl transition-all duration-300 group-hover:text-accent">Marina Bay, SG</p>
+            <p className="text-white font-display font-bold text-2xl transition-all duration-300 group-hover:text-accent">LNCT, Bhopal</p>
             <p className="text-gray-500 text-sm mt-1 uppercase tracking-widest">Location</p>
           </div>
         </motion.div>

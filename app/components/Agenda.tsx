@@ -7,49 +7,49 @@ const schedule = {
   day1: [
     {
       time: '09.30-10.30 AM',
-      title: 'Opening Remarks',
-      desc: 'Welcome to the TechArena Tech Summit. Kick off the day with an introduction from the event organizers and a sneak peek of what\'s in store.',
+      title: 'Opening Ceremony & Team Formation',
+      desc: 'Welcome to TechArena. Kick off the event with an introduction to the club, our mission, and form your teams for the upcoming challenges.',
       speaker: null
     },
     {
       time: '10.30-11.30 AM',
-      title: 'Keynote Address: Revolutionizing the Future with AI',
-      desc: 'By Dr. Emma Parker, Chief AI Scientist at InnovateX Labs. Explore the transformative impact of AI on industries and society.',
-      speaker: { name: 'Dr. Emma Parker', role: 'CEO, Zecon AI', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&q=80' }
+      title: 'Keynote: The Hacker Mindset',
+      desc: 'By Alex Chen, Lead Engineer. Explore what it takes to build innovative projects from scratch and solving real-world problems.',
+      speaker: { name: 'Alex Chen', role: 'Lead Engineer', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&q=80' }
     },
     {
       time: '12.30-01.30 PM',
-      title: 'Panel Discussion: AI in Action: Real-World Applications',
-      desc: 'A lively discussion on how AI is being implemented in sectors like healthcare, finance, and logistics, with industry experts.',
-      speaker: { name: 'Sara Williams', role: 'AI Strategist', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&q=80' }
+      title: 'Workshop: Intro to Modern Web Dev',
+      desc: 'A hands-on session on setting up your first Next.js project, styling with Tailwind CSS, and deploying to Vercel.',
+      speaker: { name: 'Sara Williams', role: 'Frontend Lead', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&q=80' }
     }
   ],
   day2: [
     {
       time: '09.30-10.30 AM',
-      title: 'Morning Networking Coffee',
-      desc: 'Catch up with fellow attendees over coffee before diving into another exciting day of learning.',
+      title: 'Morning Standup & Coffee',
+      desc: 'Catch up with fellow builders over coffee before diving into a day of intense coding and hardware hacking.',
       speaker: null
     },
     {
       time: '11.30-12.30 PM',
-      title: 'Keynote Address: The Intersection of AI and Blockchain',
-      desc: 'By John Mitchell, Co-Founder & CEO at AI Solutions. Understand how AI and blockchain can work together to create innovative solutions.',
-      speaker: { name: 'John Mitchell', role: 'Co-Founder', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&q=80' }
+      title: 'Tech Talk: Integrating AI APIs',
+      desc: 'By John Mitchell, AI Solutions Architect. Learn how to easily integrate OpenAI and Anthropic APIs into your projects.',
+      speaker: { name: 'John Mitchell', role: 'AI Architect', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&q=80' }
     }
   ],
   day3: [
     {
       time: '09.30-11.30 AM',
-      title: 'Workshop: Driving ROI with Data',
-      desc: 'Learn how businesses can use AI to optimize operations, increase profitability, and drive growth.',
+      title: 'Final Code Sprint',
+      desc: 'The last push. Finalize your projects, squash those bugs, and prepare your demos for the showcase.',
       speaker: null
     },
     {
-      time: '02.30-03.30 PM',
-      title: 'Fireside Chat: The Future of AI in Consumer Products',
-      desc: 'Join Olivia Reynolds, Principal Engineer at AlphaTech, as she discusses the role of AI in creating personalized consumer experiences.',
-      speaker: { name: 'Olivia Reynolds', role: 'Engineer', img: 'https://images.unsplash.com/photo-1598550874175-4d0ef43ce418?w=100&h=100&fit=crop&q=80' }
+      time: '02.30-04.30 PM',
+      title: 'Project Showcases & Closing',
+      desc: 'Join Olivia Reynolds as teams present what they\'ve built. Awards ceremony and closing remarks follow.',
+      speaker: { name: 'Olivia Reynolds', role: 'Club President', img: 'https://images.unsplash.com/photo-1598550874175-4d0ef43ce418?w=100&h=100&fit=crop&q=80' }
     }
   ]
 };
@@ -60,9 +60,9 @@ export default function Agenda() {
   const [activeDay, setActiveDay] = useState<DayKey>('day1');
 
   const days: { key: DayKey; label: string; title: string }[] = [
-    { key: 'day1', label: 'Day 1', title: 'Main Conference' },
-    { key: 'day2', label: 'Day 2', title: 'Deep Dive Sessions' },
-    { key: 'day3', label: 'Day 3', title: 'Networking Day' }
+    { key: 'day1', label: 'Day 1', title: 'Kickoff & Ideation' },
+    { key: 'day2', label: 'Day 2', title: 'Building & Workshops' },
+    { key: 'day3', label: 'Day 3', title: 'Showcase & Demos' }
   ];
 
   return (

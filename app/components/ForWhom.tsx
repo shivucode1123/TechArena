@@ -5,24 +5,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const attendees = [
   {
-    id: 'businessman',
-    title: 'Business Man',
-    description: 'Unlock AI\'s potential to optimize operations, enhance customer experiences, drive data-informed decisions, and stay competitive in a fast-evolving market.'
-  },
-  {
-    id: 'investors',
-    title: 'Investors',
-    description: 'Discover the most promising AI startups, evaluate cutting-edge technologies, and connect with visionary founders building the next generation of tech giants.'
-  },
-  {
-    id: 'founder',
-    title: 'Founder',
-    description: 'Gain insights on scaling your tech company, leveraging AI for growth, and securing funding from top-tier venture capitalists and angel investors.'
+    id: 'students',
+    title: 'Students & Beginners',
+    description: 'Start your tech journey by getting hands-on experience. Learn from peers, participate in introductory workshops, and build your very first project with guided mentorship.'
   },
   {
     id: 'developers',
-    title: 'Developers',
-    description: 'Deep dive into the latest AI frameworks, machine learning models, and software architectures. Participate in hands-on workshops and code along with experts.'
+    title: 'Software Developers',
+    description: 'Deep dive into the latest frameworks, APIs, and software architectures. Participate in hackathons, collaborate on open-source projects, and code along with experts.'
+  },
+  {
+    id: 'hardware',
+    title: 'Hardware Hackers',
+    description: 'Explore the physical side of tech. Work with microcontrollers, IoT devices, and robotics. Build tangible projects that interact with the real world.'
+  },
+  {
+    id: 'enthusiasts',
+    title: 'Tech Enthusiasts',
+    description: 'Stay ahead of the curve. Discover emerging technologies, evaluate cutting-edge trends, and connect with visionary creators building the next generation of solutions.'
   }
 ];
 
@@ -46,7 +46,7 @@ export default function ForWhom() {
               <p className="text-primary font-display font-bold tracking-widest uppercase">For Whom?</p>
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight max-w-xl">
-              Who Should Definitely Attend the AIcron Tech Summit
+              Who Should Definitely Join TechArena
             </h2>
           </motion.div>
 
@@ -115,11 +115,11 @@ export default function ForWhom() {
           className="w-full overflow-hidden whitespace-nowrap py-10 border-y border-white/5"
         >
           <div className="flex gap-16 text-3xl md:text-5xl font-display font-bold text-gray-500/30 uppercase tracking-widest justify-center">
-            <span>Innovation</span>
+            <span>Building</span>
             <span className="text-primary">•</span>
-            <span>Networking</span>
+            <span>Innovating</span>
             <span className="text-primary">•</span>
-            <span>Marketing</span>
+            <span>Hacking</span>
             <span className="text-primary">•</span>
             <span>Learning</span>
           </div>

@@ -3,11 +3,11 @@
 import { motion } from 'framer-motion';
 
 const speakers = [
-  { name: 'Dr. Emma Parker', role: 'Chief AI Scientist', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=500&fit=crop&q=80' },
-  { name: 'John Mitchell', role: 'CEO, AI Solutions', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&q=80' },
-  { name: 'Samantha Hayes', role: 'Data Scientist', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&h=500&fit=crop&q=80' },
-  { name: 'James Turner', role: 'AI Strategist', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&h=500&fit=crop&q=80' },
-  { name: 'Laura Chang', role: 'Director of AI', img: 'https://images.unsplash.com/photo-1598550874175-4d0ef43ce418?w=500&h=500&fit=crop&q=80' },
+  { name: 'Dr. Emma Parker', role: 'Chief Tech Advisor', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=500&fit=crop&q=80' },
+  { name: 'Alex Chen', role: 'Lead Engineer', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&q=80' },
+  { name: 'Sara Williams', role: 'Frontend Lead', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&h=500&fit=crop&q=80' },
+  { name: 'John Mitchell', role: 'AI Architect', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&h=500&fit=crop&q=80' },
+  { name: 'Olivia Reynolds', role: 'Club President', img: 'https://images.unsplash.com/photo-1598550874175-4d0ef43ce418?w=500&h=500&fit=crop&q=80' },
 ];
 
 export default function Speakers() {
@@ -27,15 +27,15 @@ export default function Speakers() {
           <div>
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-[2px] bg-gradient-to-r from-primary to-accent"></div>
-              <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-display font-bold tracking-widest uppercase text-sm">Speakers</p>
+              <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-display font-bold tracking-widest uppercase text-sm">Mentors</p>
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight text-white max-w-2xl">
-              Meet Our Visionaries
+              Meet Our Mentors & Speakers
             </h2>
           </div>
           
           <a href="#" className="hidden md:flex items-center gap-3 text-white hover:text-primary transition-colors group">
-            <span className="font-medium tracking-wide">View All Speakers</span>
+            <span className="font-medium tracking-wide">View All Mentors</span>
             <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary transition-colors">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
                 <path d="M5 12h14M12 5l7 7-7 7"/>

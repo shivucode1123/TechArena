@@ -43,27 +43,27 @@ export default function About() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           >
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold mb-8 leading-[1.1] text-white">
-              Why You Should Attend TechArena
+              Why You Should Join TechArena
             </h2>
             <p className="text-gray-400 text-lg md:text-xl mb-6 leading-relaxed font-light">
-              TechArena is the ultimate gathering for tech enthusiasts, industry leaders, and innovators to delve into the world of AI, machine learning, and the future of emerging technologies. This summit offers a unique opportunity to hear from top experts.
+              TechArena is LNCT's premier tech club where we host and organize cutting-edge tech events. We focus heavily on practical implementations—actually building things rather than just discussing theory.
             </p>
             <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
-              You'll have the chance to explore real-world use cases, witness cutting-edge demos, and connect with others who are driving change in the tech world. Be part of the conversation that's shaping the future.
+              You'll have the chance to work on real-world projects, participate in high-energy hackathons, and connect with peers who are equally passionate about bringing ideas to life. Be part of a community that builds the future.
             </p>
 
             <div className="mt-10 flex gap-12">
               <div>
+                <p className="text-4xl font-display font-bold text-white mb-2">20+</p>
+                <p className="text-gray-500 uppercase tracking-widest text-sm">Events Hosted</p>
+              </div>
+              <div>
+                <p className="text-4xl font-display font-bold text-white mb-2">500+</p>
+                <p className="text-gray-500 uppercase tracking-widest text-sm">Active Members</p>
+              </div>
+              <div>
                 <p className="text-4xl font-display font-bold text-white mb-2">50+</p>
-                <p className="text-gray-500 uppercase tracking-widest text-sm">Speakers</p>
-              </div>
-              <div>
-                <p className="text-4xl font-display font-bold text-white mb-2">20k</p>
-                <p className="text-gray-500 uppercase tracking-widest text-sm">Attendees</p>
-              </div>
-              <div>
-                <p className="text-4xl font-display font-bold text-white mb-2">3</p>
-                <p className="text-gray-500 uppercase tracking-widest text-sm">Days</p>
+                <p className="text-gray-500 uppercase tracking-widest text-sm">Projects Built</p>
               </div>
             </div>
           </motion.div>

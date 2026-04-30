@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Syne } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -30,7 +32,11 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-full flex flex-col relative bg-background text-foreground overflow-x-hidden`}>
         <div className="bg-noise" />
         <div className="bg-gradients" />
-        {children}
+        <Navbar />
+        <main className="flex-grow flex flex-col">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

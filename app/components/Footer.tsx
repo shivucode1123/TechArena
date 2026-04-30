@@ -1,14 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { CyberGlitchText } from './CyberGlitchText';
 
 export default function Footer() {
   return (
     <footer className="relative py-12 border-t border-white/10 overflow-hidden mt-32">
       {/* Massive Background Text */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none select-none -z-10 opacity-5">
-        <h2 className="text-[15rem] md:text-[25rem] font-display font-black text-white leading-none tracking-tighter">
-          AICRON
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none select-none -z-10 opacity-5 overflow-hidden">
+        <h2 className="text-[10rem] md:text-[16rem] lg:text-[22rem] font-display font-black text-white leading-none tracking-tighter whitespace-nowrap">
+          <CyberGlitchText text="TECHARENA" />
         </h2>
       </div>
 
@@ -16,15 +18,17 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
           {/* Logo */}
           <div className="text-2xl font-display font-bold tracking-wider">
-            TechArena.
+            <CyberGlitchText text="TechArena." />
           </div>
 
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-8 text-sm font-bold tracking-widest uppercase text-gray-400">
-            <a href="#speakers" className="hover:text-white transition-colors">Speakers</a>
-            <a href="#agenda" className="hover:text-white transition-colors">Agenda</a>
-            <a href="#venue" className="hover:text-white transition-colors">Venue</a>
-            <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+            <Link href="/for-whom" className="hover:text-white transition-colors">For Whom</Link>
+            <Link href="/team" className="hover:text-white transition-colors">Our Team</Link>
+            <Link href="/agenda" className="hover:text-white transition-colors">Agenda</Link>
+            <Link href="/sponsors" className="hover:text-white transition-colors">Sponsors</Link>
           </div>
 
           {/* Socials */}
@@ -42,9 +46,10 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 pt-8 border-t border-white/10">
-          <p>All copyrights © TechArena</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">Terms and Conditions</a>
+          <div>All copyrights © <CyberGlitchText text="TechArena" /></div>
+          <div className="flex flex-wrap gap-4 md:gap-8 justify-center">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms and Conditions</Link>
             <a href="https://fremix.design/" className="hover:text-white transition-colors">Designed By Jitu Raut @fremix.design</a>
           </div>
         </div>
