@@ -98,8 +98,32 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, photoUrl }: any) 
   const texture = useTexture('/lanyard.png');
   
   const customTexture = useTexture(photoUrl || '/lanyard.png');
+  
   if (customTexture && photoUrl) {
     customTexture.flipY = false;
+    
+    // object-fit: cover logic for the 3D card texture
+    if (customTexture.image) {
+      // Approximate aspect ratio of the card model
+      const cardAspect = 0.65; 
+      const imageAspect = customTexture.image.width / customTexture.image.height;
+      
+      let scaleX = 1;
+      let scaleY = 1;
+      
+      if (imageAspect > cardAspect) {
+        // Image is wider than the card. Crop sides.
+        scaleX = cardAspect / imageAspect;
+      } else {
+        // Image is taller than the card. Crop bottom.
+        scaleY = imageAspect / cardAspect;
+      }
+      
+      customTexture.repeat.set(scaleX, scaleY);
+      // Center horizontally, align to top vertically
+      customTexture.offset.set((1 - scaleX) / 2, 0); 
+      customTexture.needsUpdate = true;
+    }
   }
 
   const [curve] = useState(

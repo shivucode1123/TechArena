@@ -8,10 +8,7 @@ import { CyberGlitchText } from './CyberGlitchText';
 const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'About Us', href: '/about' },
-  { name: 'For Whom', href: '/for-whom' },
   { name: 'Our Team', href: '/team' },
-  { name: 'Agenda', href: '/agenda' },
-  { name: 'Sponsors', href: '/sponsors' },
 ];
 
 export default function Navbar() {
@@ -34,30 +31,28 @@ export default function Navbar() {
         scrolled ? 'py-4' : 'py-6'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="glass rounded-full px-6 py-3 flex items-center justify-between border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
-          <Link href="/" className="text-2xl font-display font-bold tracking-tight text-white hover:text-gray-300 transition-colors">
-            <CyberGlitchText text="TechArena." />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="glass rounded-full px-4 sm:px-6 py-3 flex items-center justify-between relative border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity z-10 flex-shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo/site_logo.jpeg" alt="TechArena Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-cover rounded-full" />
+            <span className="text-xl sm:text-2xl font-display font-bold tracking-tight text-white hidden lg:block">
+              <CyberGlitchText text="TechArena." />
+            </span>
           </Link>
 
-          <div className="hidden md:flex items-center space-x-1 bg-white/5 border border-white/10 rounded-full p-1">
+          <div className="md:absolute md:left-1/2 md:-translate-x-1/2 flex items-center space-x-1 sm:space-x-2 bg-white/5 border border-white/10 rounded-full p-1 ml-auto md:ml-0 z-10">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="px-5 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+                className="px-3 py-1.5 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap"
               >
                 {link.name}
               </Link>
             ))}
           </div>
 
-          <Link
-            href="/tickets"
-            className="bg-primary hover:bg-white hover:text-black text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 shadow-[0_0_20px_rgba(51,102,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)]"
-          >
-            Get Ticket
-          </Link>
         </div>
       </div>
     </motion.nav>

@@ -7,9 +7,16 @@ export const metadata = {
 };
 
 const teamMembers = [
-  { name: 'Alice', role: 'Founder & CEO', photoUrl: '/lanyard.png' },
-  { name: 'Bob', role: 'Head of Engineering', photoUrl: '/lanyard.png' },
-  { name: 'Charlie', role: 'Lead Designer', photoUrl: '/lanyard.png' },
+  { name: 'Harsh Gupta', role: 'President', photoUrl: '/team/Harsh_Gupta.jpeg' },
+  { name: 'Pooja Singh', role: 'Vice President', photoUrl: '/team/Pooja_Singh.jpeg' },
+  { name: 'Shivangi Sood', role: 'Secretary', photoUrl: '/team/Shivangi_Sood.jpeg' },
+  { name: 'Saloni Nema', role: 'Executive', photoUrl: '/team/Saloni_Nema.jpeg' },
+  { name: 'Arnav Singh Thakur', role: 'Treasurer', photoUrl: '/team/Arnav_Singh_Thakur.jpeg' },
+  { name: 'Nishtha Deshmukh', role: 'Personal Outreach Head', photoUrl: '/team/Nishtha_Deshmukh.jpeg' },
+  { name: 'Ajitesh Vishwakarma', role: 'Technical Lead', photoUrl: '/team/Ajitesh_Vishwakarma.jpeg' },
+  { name: 'Vedant Shah', role: 'Content Creation Head', photoUrl: '/team/Vedant_Shah.jpeg' },
+  { name: 'Devansh Shrivastava', role: 'Sponsorship Head', photoUrl: 'https://placehold.co/400x600/1a1a1a/ffffff/png?text=Devansh' },
+  { name: 'Ashish Sahu', role: 'Event Management Head', photoUrl: '/team/Ashish_Sahu.jpeg' },
 ];
 
 export default function TeamPage() {

@@ -58,11 +58,11 @@ export default function Tickets() {
         >
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-[2px] bg-gradient-to-r from-primary to-accent"></div>
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-display font-bold tracking-widest uppercase text-sm">Registration</p>
+            <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-display font-bold tracking-widest uppercase text-sm">Membership</p>
             <div className="w-12 h-[2px] bg-gradient-to-r from-accent to-primary"></div>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold leading-tight text-white max-w-3xl drop-shadow-xl">
-            Secure Your Spot Today
+            Join the Club Today
           </h2>
         </motion.div>
 
@@ -125,7 +125,7 @@ export default function Tickets() {
                     ? 'bg-gradient-to-r from-primary to-accent text-white shadow-[0_0_20px_rgba(51,102,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] hover:scale-[1.02]' 
                     : 'bg-white text-black hover:bg-gray-200 hover:scale-[1.02]'
                 }`}>
-                  Buy Ticket
+                  Join Now
                 </button>
               </div>
             </motion.div>
