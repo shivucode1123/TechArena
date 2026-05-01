@@ -9,6 +9,13 @@ import * as THREE from 'three';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
+declare module '@react-three/fiber' {
+  interface ThreeElements {
+    meshLineGeometry: any;
+    meshLineMaterial: any;
+  }
+}
+
 export default function Lanyard({ 
   position = [0, 0, 30], 
   gravity = [0, -40, 0], 
@@ -81,32 +88,33 @@ export default function Lanyard({
 }
 
 function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, photoUrl }: any) {
-  const band = useRef<any>();
-  const fixed = useRef<any>();
-  const j1 = useRef<any>();
-  const j2 = useRef<any>();
-  const j3 = useRef<any>();
-  const card = useRef<any>();
+  const band = useRef<any>(null);
+  const fixed = useRef<any>(null);
+  const j1 = useRef<any>(null);
+  const j2 = useRef<any>(null);
+  const j3 = useRef<any>(null);
+  const card = useRef<any>(null);
   
   const vec = new THREE.Vector3();
   const ang = new THREE.Vector3();
   const rot = new THREE.Vector3();
   const dir = new THREE.Vector3();
   
-  const segmentProps = { type: 'dynamic' as const, canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 };
+  const segmentProps = { type: 'dynamic' as const, canSleep: true, colliders: false as any, angularDamping: 4, linearDamping: 4 };
   const { nodes, materials } = useGLTF('/card.glb') as any;
   const texture = useTexture('/lanyard.png');
   
-  const customTexture = useTexture(photoUrl || '/lanyard.png');
+  const customTexture = useTexture(photoUrl || '/lanyard.png') as THREE.Texture;
   
   if (customTexture && photoUrl) {
     customTexture.flipY = false;
     
     // object-fit: cover logic for the 3D card texture
     if (customTexture.image) {
+      const img = customTexture.image as any;
       // Approximate aspect ratio of the card model
       const cardAspect = 0.65; 
-      const imageAspect = customTexture.image.width / customTexture.image.height;
+      const imageAspect = img.width / img.height;
       
       let scaleX = 1;
       let scaleY = 1;
