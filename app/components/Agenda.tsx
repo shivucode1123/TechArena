@@ -1,157 +1,204 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import Silk from './Silk';
 
-const schedule = {
-  day1: [
-    {
-      time: '09.30-10.30 AM',
-      title: 'Opening Ceremony & Team Formation',
-      desc: 'Welcome to TechArena. Kick off the event with an introduction to the club, our mission, and form your teams for the upcoming challenges.',
-      speaker: null
-    },
-    {
-      time: '10.30-11.30 AM',
-      title: 'Keynote: The Hacker Mindset',
-      desc: 'By Alex Chen, Lead Engineer. Explore what it takes to build innovative projects from scratch and solving real-world problems.',
-      speaker: { name: 'Alex Chen', role: 'Lead Engineer', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&q=80' }
-    },
-    {
-      time: '12.30-01.30 PM',
-      title: 'Workshop: Intro to Modern Web Dev',
-      desc: 'A hands-on session on setting up your first Next.js project, styling with Tailwind CSS, and deploying to Vercel.',
-      speaker: { name: 'Sara Williams', role: 'Frontend Lead', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&q=80' }
-    }
-  ],
-  day2: [
-    {
-      time: '09.30-10.30 AM',
-      title: 'Morning Standup & Coffee',
-      desc: 'Catch up with fellow builders over coffee before diving into a day of intense coding and hardware hacking.',
-      speaker: null
-    },
-    {
-      time: '11.30-12.30 PM',
-      title: 'Tech Talk: Integrating AI APIs',
-      desc: 'By John Mitchell, AI Solutions Architect. Learn how to easily integrate OpenAI and Anthropic APIs into your projects.',
-      speaker: { name: 'John Mitchell', role: 'AI Architect', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&q=80' }
-    }
-  ],
-  day3: [
-    {
-      time: '09.30-11.30 AM',
-      title: 'Final Code Sprint',
-      desc: 'The last push. Finalize your projects, squash those bugs, and prepare your demos for the showcase.',
-      speaker: null
-    },
-    {
-      time: '02.30-04.30 PM',
-      title: 'Project Showcases & Closing',
-      desc: 'Join Olivia Reynolds as teams present what they\'ve built. Awards ceremony and closing remarks follow.',
-      speaker: { name: 'Olivia Reynolds', role: 'Club President', img: 'https://images.unsplash.com/photo-1598550874175-4d0ef43ce418?w=100&h=100&fit=crop&q=80' }
-    }
-  ]
+/* ─────────────────────── types & data ─────────────────────── */
+
+type Speaker = { name: string; role: string; img: string };
+
+type Session = {
+  time: string;
+  title: string;
+  desc: string;
+  speakers?: Speaker[];
 };
 
-type DayKey = keyof typeof schedule;
+type Day = {
+  label: string;
+  dayTitle: string;
+  sessions: Session[];
+};
+
+const agenda: Day[] = [
+  {
+    label: 'Kickoff',
+    dayTitle: 'Day 1 : Main Conference',
+    sessions: [
+      {
+        time: '09.30-10.30 AM',
+        title: 'Opening Remarks',
+        desc: "Welcome to the AIcron Tech Summit. Kick off the day with an introduction from the event organizers and a sneak peek of what's in store.",
+      },
+      {
+        time: '10.30-11.30 AM',
+        title: 'Keynote Address: Revolutionizing the Future with AI',
+        desc: 'By Dr. Emma Parker, Chief AI Scientist at InnovateX Labs. Explore the transformative impact of AI on industries and society.',
+        speakers: [
+          { name: 'Dr. Emma Parker', role: 'CEO, Zecon AI', img: 'https://i.pravatar.cc/200?u=emma_parker' },
+        ],
+      },
+      {
+        time: '12.30-01.30 PM',
+        title: 'Panel Discussion: AI in Action: Real-World Applications',
+        desc: 'A lively discussion on how AI is being implemented in sectors like healthcare, finance, and logistics, with industry experts.',
+        speakers: [
+          { name: 'Sara Williams',  role: 'AI Strategist, InnovateTech',         img: 'https://i.pravatar.cc/200?u=sara' },
+          { name: 'Ravi Singh',     role: 'Lead AI Engineer, MedTech Solutions',  img: 'https://i.pravatar.cc/200?u=ravi' },
+          { name: 'James Turner',   role: 'Senior Data Scientist, Quantum Analytics', img: 'https://i.pravatar.cc/200?u=james_t' },
+          { name: 'Emily Roberts',  role: 'Director, AI Applications',            img: 'https://i.pravatar.cc/200?u=emily' },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Main Day',
+    dayTitle: 'Day 2 : Deep Dive Sessions',
+    sessions: [
+      {
+        time: '09.30-10.30 AM',
+        title: 'Morning Networking Coffee',
+        desc: 'Catch up with fellow attendees over coffee before diving into another exciting day of learning.',
+      },
+      {
+        time: '11.30-12.30 PM',
+        title: 'Keynote Address: The Intersection of AI and Blockchain',
+        desc: 'By John Mitchell, Co-Founder & CEO at AI Solutions Corp. Understand how AI and blockchain can work together to create innovative solutions.',
+        speakers: [
+          { name: 'John Mitchell', role: 'Co-Founder at AI Corp', img: 'https://i.pravatar.cc/200?u=john_m' },
+        ],
+      },
+      {
+        time: '2.30-04.30 PM',
+        title: 'Panel Discussion: AI and Automation in Industry 4.0',
+        desc: 'Panelists explore how AI-powered automation is driving the future of manufacturing and supply chain.',
+        speakers: [
+          { name: 'Dr. Lisa White', role: 'Chief Innovation Officer, TechFlow',   img: 'https://i.pravatar.cc/200?u=lisa' },
+          { name: 'Mark Johnson',   role: 'Director, AI Solutions, RoboTech',      img: 'https://i.pravatar.cc/200?u=mark' },
+          { name: 'Priya Patel',    role: 'Head, Digital Transformation',          img: 'https://i.pravatar.cc/200?u=priya_p' },
+          { name: 'David Collins',  role: 'VP, Automation & Robotics',             img: 'https://i.pravatar.cc/200?u=david' },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Sumup',
+    dayTitle: 'Day 3 : Networking Day',
+    sessions: [
+      {
+        time: '09.30-11.30 AM',
+        title: 'Workshop: Driving ROI with Data',
+        desc: 'Learn how businesses can use AI to optimize operations, increase profitability, and drive growth.',
+      },
+      {
+        time: '02.30-03.30 PM',
+        title: 'Fireside Chat: The Future of AI in Consumer Products',
+        desc: 'Join Olivia Reynolds, Principal Engineer at AlphaTech, as she discusses the role of AI in creating personalized consumer experiences.',
+        speakers: [
+          { name: 'Olivia Reynolds', role: 'Engineer at Alpha Tech', img: 'https://i.pravatar.cc/200?u=olivia' },
+        ],
+      },
+    ],
+  },
+];
+
+/* ─────────────────────── component ─────────────────────── */
 
 export default function Agenda() {
-  const [activeDay, setActiveDay] = useState<DayKey>('day1');
-
-  const days: { key: DayKey; label: string; title: string }[] = [
-    { key: 'day1', label: 'Day 1', title: 'Kickoff & Ideation' },
-    { key: 'day2', label: 'Day 2', title: 'Building & Workshops' },
-    { key: 'day3', label: 'Day 3', title: 'Showcase & Demos' }
-  ];
-
   return (
-    <section id="agenda" className="py-20 md:py-32 relative z-10 border-y border-white/5 bg-background/80 backdrop-blur-xl">
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-accent/5 to-transparent pointer-events-none" />
-      <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-primary/5 to-transparent pointer-events-none" />
+    <section id="agenda" className="relative bg-black py-20 px-6 md:px-10 overflow-hidden">
+      {/* Silk WebGL Background */}
+      <div className="absolute inset-0 z-0">
+        <Silk
+          speed={4.4}
+          scale={0.6}
+          color="#050d7b"
+          noiseIntensity={1.5}
+          rotation={0.3}
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
 
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="w-12 h-[2px] bg-gradient-to-r from-primary to-accent"></div>
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-display font-bold tracking-widest uppercase text-sm">Event agenda</p>
-            <div className="w-12 h-[2px] bg-gradient-to-r from-accent to-primary"></div>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-display font-bold leading-tight text-white drop-shadow-lg">
-            Schedule Details
-          </h2>
+      {/* Section header */}
+      <div className="max-w-7xl mx-auto mb-20 relative z-10">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="w-10 h-[2px] bg-white" />
+          <span className="text-white/60 font-black uppercase tracking-[0.3em] text-xs">Event agenda</span>
         </div>
+        <h2 className="text-5xl md:text-7xl font-black text-white leading-[1.0] tracking-tighter max-w-3xl">
+          Meet our sponsors who help to<br />
+          <span className="text-white/30">bring this think live</span>
+        </h2>
+      </div>
 
-        {/* Tabs */}
-        <div className="flex flex-col md:flex-row justify-center gap-4 mb-16">
-          {days.map((day) => {
-            const isActive = activeDay === day.key;
-            return (
-              <button
-                key={day.key}
-                onClick={() => setActiveDay(day.key)}
-                className={`relative px-8 py-5 rounded-2xl transition-all duration-300 ${
-                  isActive ? 'text-white scale-105' : 'glass hover:bg-white/10 text-gray-500 hover:text-gray-300'
-                } text-left flex flex-col items-center md:items-start flex-1 border ${isActive ? 'border-primary/50 shadow-[0_0_30px_rgba(51,102,255,0.2)]' : 'border-white/10'}`}
-              >
-                {isActive && (
-                  <motion.div 
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl border border-primary/50"
-                    style={{ zIndex: -1 }}
-                  />
-                )}
-                <span className={`text-xs font-bold tracking-widest uppercase mb-2 ${isActive ? 'text-primary' : ''}`}>{day.label}</span>
-                <span className="font-display font-bold whitespace-nowrap text-lg">{day.title}</span>
-              </button>
-            );
-          })}
-        </div>
+      {/* Days — each day header is sticky */}
+      <div className="max-w-7xl mx-auto space-y-0 relative z-10">
+        {agenda.map((day, di) => (
+          <div key={di} className="mb-24">
 
-        {/* Schedule List */}
-        <div className="min-h-[500px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeDay}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="space-y-6"
-            >
-              {schedule[activeDay].map((item, index) => (
-                <div key={index} className="group glass p-8 md:p-10 rounded-3xl border-white/10 hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(51,102,255,0.15)] relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="flex flex-col md:flex-row gap-8">
-                    <div className="md:w-1/4">
-                      <p className="text-primary font-display font-bold tracking-wider text-lg">{item.time}</p>
-                    </div>
-                    <div className="md:w-3/4">
-                      <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all">{item.title}</h3>
-                      <p className="text-gray-400 leading-relaxed mb-8 font-light text-lg">{item.desc}</p>
-                      
-                      {item.speaker && (
-                        <div className="flex items-center gap-5 pt-6 border-t border-white/10 mt-auto">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img 
-                            src={item.speaker.img} 
-                            alt={item.speaker.name}
-                            className="w-14 h-14 rounded-full object-cover border border-white/20 grayscale group-hover:grayscale-0 transition-all duration-500"
-                          />
-                          <div>
-                            <p className="font-display font-bold text-white text-lg">{item.speaker.name}</p>
-                            <p className="text-sm text-primary uppercase tracking-wider mt-1 font-medium">{item.speaker.role}</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
+            {/* ── Sticky day header ── */}
+            <div className="sticky top-0 z-30 flex items-stretch gap-0 rounded-2xl overflow-hidden mb-10">
+              <div className="bg-blue-600 text-white font-black text-2xl px-10 py-6 flex items-center shrink-0 min-w-[160px] justify-center rounded-l-2xl">
+                {day.label}
+              </div>
+              <div className="bg-[#111] text-white font-black text-2xl px-10 py-6 flex items-center flex-1 rounded-r-2xl">
+                {day.dayTitle}
+              </div>
+            </div>
+
+            {/* ── Sessions ── */}
+            <div className="space-y-8">
+              {day.sessions.map((session, si) => (
+                <motion.div
+                  key={si}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: si * 0.08 }}
+                  className="flex gap-8 md:gap-12"
+                >
+                  {/* Time */}
+                  <div className="w-44 shrink-0 pt-7">
+                    <span className="text-white/40 font-black text-base uppercase tracking-widest leading-relaxed">
+                      {session.time}
+                    </span>
                   </div>
-                </div>
+
+                  {/* Card */}
+                  <div className="flex-1 bg-[#111111] border border-white/5 rounded-2xl p-10 hover:border-white/10 transition-all duration-500">
+                    <h3 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight leading-snug">
+                      {session.title}
+                    </h3>
+                    <p className="text-white/40 text-base leading-relaxed mb-8">{session.desc}</p>
+
+                    {/* Speakers */}
+                    {session.speakers && session.speakers.length > 0 && (
+                      <div
+                        className={`grid gap-5 pt-8 border-t border-white/5 ${
+                          session.speakers.length === 1 ? 'grid-cols-1' : 'grid-cols-2'
+                        }`}
+                      >
+                        {session.speakers.map((sp, idx) => (
+                          <div key={idx} className="flex items-center gap-5">
+                            <img
+                              src={sp.img}
+                              alt={sp.name}
+                              className="w-20 h-20 rounded-2xl object-cover border border-white/10 shrink-0"
+                            />
+                            <div>
+                              <p className="text-white font-black text-lg leading-tight">{sp.name}</p>
+                              <p className="text-white/40 text-sm mt-1 leading-tight">{sp.role}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
               ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -1,10 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 const plans = [
   {
-    name: 'General Pass',
+    name: 'General Admission',
     price: '$299',
     type: 'Single admission',
     features: [
@@ -12,7 +13,7 @@ const plans = [
       'Entry to keynote sessions',
       'Access to tech expo floor',
       'Standard networking lounge',
-      'TechArena welcome kit'
+      'Summit welcome kit'
     ]
   },
   {
@@ -21,7 +22,6 @@ const plans = [
     type: 'Single admission',
     highlight: true,
     features: [
-      'Premium experience with priority access, exclusive sessions, and VIP networking.',
       'Priority seating at all sessions',
       'Access to VIP lounge & bar',
       'Invitation to speaker dinner',
@@ -33,7 +33,6 @@ const plans = [
     price: '$1299',
     type: '5 Members',
     features: [
-      'Perfect for companies or teams attending together. Includes access for 5 members.',
       '5 full-access passes',
       'Reserved group seating',
       'Team branding opportunities',
@@ -43,93 +42,120 @@ const plans = [
 ];
 
 export default function Tickets() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  
   return (
-    <section id="tickets" className="py-20 md:py-32 relative z-10 overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[150px] -translate-y-1/2 -z-10 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[150px] -translate-y-1/2 -z-10 pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-24 flex flex-col items-center"
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-[2px] bg-gradient-to-r from-primary to-accent"></div>
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-display font-bold tracking-widest uppercase text-sm">Membership</p>
-            <div className="w-12 h-[2px] bg-gradient-to-r from-accent to-primary"></div>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold leading-tight text-white max-w-3xl drop-shadow-xl">
-            Join the Club Today
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plans.map((plan, index) => (
+    <section id="tickets" className="relative z-10 bg-black overflow-visible">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Left: Sticky 3D Visual */}
+          <div className="lg:col-span-5 lg:sticky lg:top-40 h-fit mb-20 lg:mb-0">
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              className={`relative group flex flex-col ${plan.highlight ? 'md:-mt-8 md:mb-8' : ''}`}
+              transition={{ duration: 1 }}
+              className="relative aspect-square flex items-center justify-center"
             >
-              {plan.highlight && (
-                <div className="absolute -inset-0.5 bg-gradient-to-b from-primary to-accent rounded-[2.5rem] blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
-              )}
+              {/* Background Glow */}
+              <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-[100px] animate-pulse" />
               
-              <div className={`glass p-10 rounded-[2.5rem] border relative flex-1 flex flex-col transition-all duration-500 ${
-                plan.highlight 
-                  ? 'border-white/20 bg-background/80 hover:bg-background shadow-[0_0_50px_rgba(51,102,255,0.2)]' 
-                  : 'border-white/10 hover:border-white/30 bg-background/60 hover:bg-background/80'
-              }`}>
-                {/* Glow behind text */}
-                {plan.highlight && (
-                   <div className="absolute top-10 right-10 w-32 h-32 bg-primary/20 rounded-full blur-[50px] pointer-events-none" />
-                )}
+              {/* Colorful 3D Ticket Visual */}
+              <motion.div
+                animate={{ 
+                  y: [0, -40, 0],
+                  rotateY: [0, 360],
+                  rotateX: [10, -10, 10],
+                  rotateZ: [5, -5, 5]
+                }}
+                transition={{ 
+                  duration: 10, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+                className="relative z-10 w-full max-w-[450px]"
+              >
+                <svg viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_0_100px_rgba(59,130,246,0.6)]">
+                   <path d="M50 50H350V400C350 420 330 430 320 430C310 430 290 420 290 400V380H110V400C110 420 90 430 80 430C70 430 50 420 50 400V50Z" fill="url(#ticketGrad)" fillOpacity="0.2" stroke="url(#strokeGrad)" strokeWidth="3" strokeOpacity="0.5"/>
+                   
+                   {/* Glass Reflective Layer */}
+                   <rect x="70" y="70" width="260" height="300" rx="20" fill="white" fillOpacity="0.1" stroke="white" strokeWidth="1" strokeOpacity="0.2"/>
+                   
+                   {/* Neon Details */}
+                   <circle cx="200" cy="200" r="60" stroke="url(#neonGrad)" strokeWidth="2" strokeDasharray="10 5"/>
+                   <line x1="90" y1="330" x2="310" y2="330" stroke="url(#neonGrad)" strokeWidth="2" strokeDasharray="15 10"/>
+                   
+                   <defs>
+                     <linearGradient id="ticketGrad" x1="50" y1="50" x2="350" y2="600" gradientUnits="userSpaceOnUse">
+                       <stop stopColor="#3B82F6"/>
+                       <stop offset="0.5" stopColor="#8B5CF6"/>
+                       <stop offset="1" stopColor="#EC4899"/>
+                     </linearGradient>
+                     <linearGradient id="strokeGrad" x1="50" y1="50" x2="350" y2="600" gradientUnits="userSpaceOnUse">
+                       <stop stopColor="white"/>
+                       <stop offset="1" stopColor="#3B82F6" stopOpacity="0"/>
+                     </linearGradient>
+                     <linearGradient id="neonGrad" x1="90" y1="200" x2="310" y2="200" gradientUnits="userSpaceOnUse">
+                       <stop stopColor="#60A5FA"/>
+                       <stop offset="1" stopColor="#F472B6"/>
+                     </linearGradient>
+                   </defs>
+                </svg>
+              </motion.div>
 
-                <div className="mb-8 relative z-10">
-                  <span className={`inline-block px-4 py-1.5 border rounded-full text-xs font-bold uppercase tracking-widest mb-6 ${
-                    plan.highlight ? 'bg-primary/20 border-primary/50 text-primary' : 'bg-white/5 border-white/10 text-gray-400'
-                  }`}>
-                    Early Bird
-                  </span>
-                  <h3 className="text-3xl font-display font-bold text-white mb-2">{plan.name}</h3>
-                  <div className="flex items-end gap-2 mb-4">
-                    <span className="text-6xl font-display font-black text-white">{plan.price}</span>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-4 bg-blue-600/20 blur-2xl rounded-full" />
+            </motion.div>
+          </div>
+
+          {/* Right: Pricing Cards - Scrollable stack */}
+          <div className="lg:col-span-7 flex flex-col gap-10 pb-40">
+            {plans.map((plan, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className={`relative group p-12 rounded-[3.5rem] border transition-all duration-1000 bg-blue-600/10 border-blue-500/60 shadow-[0_0_100px_rgba(37,99,235,0.15)]`}
+              >
+                {/* Mesh Background for All Cards */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 via-transparent to-indigo-900/40 rounded-[3.5rem] pointer-events-none" />
+
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-10">
+                    <span className="inline-block px-5 py-2 rounded-full bg-blue-600/20 border border-blue-500/30 text-[10px] font-black uppercase tracking-[0.3em] text-blue-400">
+                      Early Bird
+                    </span>
+                    <div className="text-right">
+                       <h3 className="text-6xl font-black text-white leading-none tracking-tighter mb-1">{plan.price}</h3>
+                       <p className="text-white/40 font-black uppercase tracking-widest text-[10px]">{plan.type}</p>
+                    </div>
                   </div>
-                  <p className={plan.highlight ? 'text-accent font-medium' : 'text-primary font-medium'}>{plan.type}</p>
-                </div>
-
-                <div className="flex-1 relative z-10 border-t border-white/10 pt-8 mt-4 mb-10">
-                  <ul className="space-y-5">
+                  
+                  <h4 className="text-3xl font-black text-white mb-8 tracking-tighter uppercase">{plan.name}</h4>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-5 mb-14 border-t border-white/5 pt-10">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="flex gap-4 text-gray-400 text-base font-light">
-                        <div className={`mt-1.5 shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${
-                          plan.highlight ? 'bg-accent/20' : 'bg-primary/20'
-                        }`}>
-                          <div className={`w-2 h-2 rounded-full ${
-                            plan.highlight ? 'bg-accent' : 'bg-primary'
-                          }`} />
-                        </div>
+                      <li key={i} className="flex gap-4 text-sm text-white/50 font-medium leading-relaxed">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />
                         {feature}
                       </li>
                     ))}
-                  </ul>
-                </div>
+                  </div>
 
-                <button className={`w-full py-5 rounded-full font-bold text-lg transition-all duration-300 relative z-10 ${
-                  plan.highlight 
-                    ? 'bg-gradient-to-r from-primary to-accent text-white shadow-[0_0_20px_rgba(51,102,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] hover:scale-[1.02]' 
-                    : 'bg-white text-black hover:bg-gray-200 hover:scale-[1.02]'
-                }`}>
-                  Join Now
-                </button>
-              </div>
-            </motion.div>
-          ))}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full py-5 rounded-3xl font-black uppercase tracking-[0.3em] text-[11px] flex items-center justify-center gap-4 transition-all bg-white text-black hover:bg-blue-600 hover:text-white shadow-[0_20px_40px_rgba(255,255,255,0.1)]"
+                  >
+                    Buy Ticket
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
