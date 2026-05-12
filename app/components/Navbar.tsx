@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useScroll, AnimatePresence, useMotionValueEvent } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
   { name: 'Speaker', href: '/speakers' },
@@ -12,63 +13,138 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
+  const [isCompact, setIsCompact] = useState(false);
+  const lastScrollY = useRef(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const direction = latest > lastScrollY.current ? "down" : "up";
+    
+    // Top of page (within 50px): always expanded
+    if (latest < 50) {
+      setIsCompact(false);
+    } 
+    // Scrolling down: become compact (Image 4)
+    else if (direction === "down" && latest > 50) {
+      setIsCompact(true);
+    }
+    // Scrolling up: expand (Image 3)
+    else if (direction === "up") {
+      setIsCompact(false);
+    }
+    
+    lastScrollY.current = latest;
+  });
 
   return (
-    <div className="fixed top-6 left-0 right-0 z-50 px-8">
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className={`flex items-center justify-between transition-all duration-500 rounded-full px-6 py-3 border ${
-          scrolled
-            ? 'bg-black/70 backdrop-blur-2xl border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.6)]'
-            : 'bg-transparent border-transparent'
-        }`}
+    <motion.header
+      initial={false}
+      animate={{
+        width: isCompact ? '400px' : '100%',
+        top: isCompact ? '24px' : '0px',
+        borderRadius: isCompact ? '100px' : '0px',
+        backgroundColor: isCompact ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0)',
+        borderColor: isCompact ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0)',
+        y: 0,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 30,
+      }}
+      style={{
+        left: '50%',
+        x: '-50%',
+        borderWidth: '1px',
+        backdropFilter: isCompact ? 'blur(24px)' : 'blur(0px)',
+      }}
+      className={cn(
+        "fixed z-[100] flex items-center justify-center overflow-hidden",
+        isCompact ? "shadow-[0_20px_50px_rgba(0,0,0,0.5)]" : ""
+      )}
+    >
+      <motion.div
+        animate={{
+          paddingLeft: isCompact ? '20px' : '60px',
+          paddingRight: isCompact ? '20px' : '60px',
+          paddingTop: isCompact ? '10px' : '28px',
+          paddingBottom: isCompact ? '10px' : '28px',
+        }}
+        className="flex items-center justify-between w-full max-w-[1440px] relative"
       >
         {/* Logo */}
-        <Link href="/" className="text-xl font-black tracking-tighter text-white lowercase">
-          eventis
+        <Link href="/" className="flex items-center gap-2 group relative z-10 shrink-0">
+          <span className="text-white text-3xl font-bold tracking-tighter lowercase transition-colors duration-300">
+            eventis
+          </span>
         </Link>
 
-        {/* Center Nav Links Pill */}
-        <div className={`hidden md:flex items-center rounded-full border transition-all duration-500 ${
-          scrolled
-            ? 'bg-white/5 border-white/10'
-            : 'bg-white/10 border-white/10 backdrop-blur-xl'
-        }`}>
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.15em] text-white/60 hover:text-white hover:bg-white/10 transition-all"
-            >
-              {link.name}
-            </Link>
-          ))}
+        {/* Navigation Links - Hidden in compact mode */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center">
+          <AnimatePresence>
+            {!isCompact && (
+              <motion.nav
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="hidden md:flex items-center gap-3"
+              >
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="px-6 py-2.5 bg-white/10 hover:bg-white/20 rounded-full text-[14px] font-semibold text-white/90 transition-all backdrop-blur-md border border-white/5 whitespace-nowrap"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </motion.nav>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* CTA Button */}
         <motion.a
           href="/tickets"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-white text-black px-6 py-2.5 rounded-full font-black text-[11px] uppercase tracking-[0.15em] flex items-center gap-2.5 hover:bg-blue-600 hover:text-white transition-all shadow-xl"
+          layout
+          className={cn(
+            "group flex items-center gap-3 bg-white rounded-full transition-all duration-300 shrink-0",
+            isCompact ? "pl-5 pr-1.5 py-1.5" : "pl-6 pr-2 py-2"
+          )}
         >
-          Get Ticket
-          <div className="w-5 h-5 bg-black/10 rounded-full flex items-center justify-center">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          <span className="text-black text-[14px] font-bold whitespace-nowrap">
+            Get Ticket
+          </span>
+          <div className="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+            <svg 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="white" 
+              strokeWidth="3" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
           </div>
         </motion.a>
-      </motion.nav>
-    </div>
+      </motion.div>
+
+      {/* Decorative full-width line for top mode */}
+      <AnimatePresence>
+        {!isCompact && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/10" 
+          />
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }
